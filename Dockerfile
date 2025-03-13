@@ -7,7 +7,7 @@ WORKDIR /app
 
 RUN --mount=type=cache,target=/var/cache/apt,id=apt-cahce-1-$TARGETARCH$TARGETVARIANT-builder,sharing=locked \
     --mount=type=cache,target=/var/lib/apt,id=apt-cahce-2-$TARGETARCH$TARGETVARIANT-builder,sharing=locked \
-    <<EOS
+<<EOS
 set -ex
 rm -f /etc/apt/apt.conf.d/docker-clean
 echo 'Binary::apt::APT::Keep-Downloaded-Packages "1";' > /etc/apt/apt.conf.d/keep-cache
@@ -52,7 +52,7 @@ needed="python3.12-minimal \
     python3.12-venv \
     libpython3.12-stdlib \
     libpython3.12-dev \
-    golang-1.22-go \
+    golang-1.24-go \
     temurin-21-jdk \
     gcc-13 \
     g++-13 \
@@ -82,7 +82,7 @@ apt-get install -y $needed
 update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13
 update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 13
 update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 12
-update-alternatives --install /usr/bin/go go /usr/lib/go-1.22/bin/go 22
+update-alternatives --install /usr/bin/go go /usr/lib/go-1.24/bin/go 24
 rm -rf /usr/lib/jvm/temurin-21-jdk-*/jmods
 rm -rf /usr/lib/jvm/temurin-21-jdk-*/lib/src.zip
 apt-mark auto '.*' > /dev/null
